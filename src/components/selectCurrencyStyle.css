@@ -1,0 +1,67 @@
+.currencies-container {
+    position: absolute;
+    top: 47px;
+    left: 0;
+    height: 250px;
+    width: 175px;
+    overflow-y: scroll;
+    background-color: white;
+    z-index: 10000;
+    border: 1px solid #dddddd;
+    border-radius: 8px
+}
+
+.currency-search {
+    width: 100%;
+    height: 35px;
+    margin: 10px 0 10px 0;
+}
+
+.currency-search input {
+    width: 80%;
+    height: 100%;
+    padding: 0 20px 0 20px;
+    text-align: left;
+    border: 2px solid #dddddd;
+    border-radius: 50px;
+}
+
+.currency {
+    width: 100%;
+    height: 60px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.currency:hover {
+    background-color: #dddddd;
+}
+
+.currency.active {
+    background-color: #dddddd;
+}
+
+.currency-desc {
+    font-size: 10px;
+    color: #666666;
+    margin: 3px 0 3px;
+}
+
+.border-currency {
+    width: 50%;
+    height: 1px;
+    background-color: black;
+    margin: 5px auto;
+}
+
+@media (min-width: 400px) {
+    .currencies-container {
+        top: 57px;
+    }
+}
+
+@media (min-width: 600px) {
+    .currencies-container {
+        width: 220px;
+    }
+}
