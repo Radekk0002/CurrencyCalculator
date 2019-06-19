@@ -57,7 +57,7 @@ class App extends Component {
           />
         </Helmet>
         <div className="App">
-          <h1> Currency calculator</h1> <div className="border-top"> </div>{" "}
+          <h1> Currency calculator</h1> <div className="border-top"> </div>
           <div className="container-conversion">
             <div className="conversions">
               <div className="currency-from">
@@ -93,10 +93,10 @@ class App extends Component {
                     </div>
                   </div>
                 </div>
-              </div>{" "}
+              </div>
               <div className="exchange" onClick={this.exchange}>
-                {" "}
-              </div>{" "}
+                
+              </div>
               <div className="currency-to">
                 <div className="choose-currency-container">
                   <div
@@ -104,38 +104,38 @@ class App extends Component {
                     onClick={this.showHideTableSelectTo}
                   >
                     <span className="currency-code">
-                      {this.state.currentCurrencyTo}{" "}
-                    </span>{" "}
-                    <div className="arrow-choose"> </div>{" "}
-                  </div>{" "}
+                      {this.state.currentCurrencyTo}
+                    </span>
+                    <div className="arrow-choose"> </div>
+                  </div>
                   {this.state.activeSelectTo ? (
                     <SelectCurrency
                       currencies={this.state.currencies}
                       onClick={this.changeCurrencyTo}
                     />
-                  ) : null}{" "}
+                  ) : null}
                 </div>
                 <div className="result-table result-value">
                   {this.state.result}
                 </div>
-              </div>{" "}
+              </div>
               <div className="submit">
                 <button
                   type="submit"
                   className="button"
                   onClick={this.calculate}
                 >
-                  Calculate{" "}
-                </button>{" "}
-              </div>{" "}
-              <div className="border-bottom"> </div>{" "}
-            </div>{" "}
+                  Calculate
+                </button>
+              </div>
+              <div className="border-bottom"> </div>
+            </div>
             <div>
-              <p className="result-text">{this.state.resultText}</p>{" "}
-              <div className="border-bottom-result"> </div>{" "}
-            </div>{" "}
-          </div>{" "}
-        </div>{" "}
+              <p className="result-text">{this.state.resultText}</p>
+              <div className="border-bottom-result"> </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
@@ -147,7 +147,6 @@ class App extends Component {
   };
 
   showHideTableSelectFrom = () => {
-    console.log("object");
     this.setState({
       activeSelectFrom: !this.state.activeSelectFrom,
       activeSelectTo: false
@@ -189,6 +188,7 @@ class App extends Component {
     });
   };
 
+  //Prevent from sending number with letters, commas etc.
   checkNumber = () => {
     let value = this.state.numberValue;
     let dot = 0;
@@ -196,7 +196,7 @@ class App extends Component {
     let i = 0;
     let lettBefDot = 0;
     for (i; i < value.length; i++) {
-      //Get signs different than number or dots or commas
+      //Get different signs than number or dots or commas
       if (isNaN(value[i]) && value[i] !== "." && value[i] !== ",") {
         lettBefDot++;
       }
@@ -321,15 +321,13 @@ class App extends Component {
         result = result.toFixed(2);
         this.setState({
           result: result,
-          resultText:
-            "" +
-            this.state.numberValue +
+          resultText: this.state.numberValue +
             " " +
             this.state.currentCurrencyFrom +
             " = " +
             result +
             " " +
-            this.state.currentCurrencyTo
+            this.state.currentCurrencyTo       
         });
       });
   };

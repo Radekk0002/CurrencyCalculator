@@ -39,11 +39,10 @@ class SelectCurrency extends Component {
                 {obj.currency}
               </p>
               <div className="border-currency" id={obj.id}>
-                {" "}
               </div>
             </div>
           );
-        })}{" "}
+        })}
       </div>
     );
   }
