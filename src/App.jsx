@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Helmet } from "react-helmet";
 import SelectCurrency from "./components/SelectCurrency";
 import "./App.css";
 
@@ -17,6 +16,9 @@ class App extends Component {
   };
   constructor(props) {
     super(props);
+    this.currency = React.createRef();
+    this.currencyTo = React.createRef();
+
     let currencyContainer = [{ id: 0, code: "PLN", currency: "polski złoty" }];
     fetch("http://api.nbp.pl/api/exchangerates/tables/a/?format=json", {
       method: "GET"
@@ -49,19 +51,12 @@ class App extends Component {
   render() {
     return (
       <div className="wrapper" onClick={this.hideTableSelect}>
-        <Helmet>
-          <title>Currency Calculator</title>
-          <link
-            href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500&display=swap&subset=latin-ext"
-            rel="stylesheet"
-          />
-        </Helmet>
         <div className="App">
           <h1> Currency calculator</h1> <div className="border-top"> </div>
           <div className="container-conversion">
             <div className="conversions">
               <div className="currency-from">
-                <div className="choose-currency-container">
+                <div ref={this.currency} className="choose-currency-container">
                   <div
                     className="choose-currency"
                     onClick={this.showHideTableSelectFrom}
@@ -94,11 +89,12 @@ class App extends Component {
                   </div>
                 </div>
               </div>
-              <div className="exchange" onClick={this.exchange}>
-                
-              </div>
+              <div className="exchange" onClick={this.exchange}></div>
               <div className="currency-to">
-                <div className="choose-currency-container">
+                <div
+                  ref={this.currencyTo}
+                  className="choose-currency-container"
+                >
                   <div
                     className="choose-currency"
                     onClick={this.showHideTableSelectTo}
@@ -162,15 +158,11 @@ class App extends Component {
 
   //Hide when clicked outside of box with currencies
   hideTableSelect = e => {
+    e.stopPropagation();
     if (
       //Not to close when clicked on .choose-currency divs and .currencies-container divs
-      e.target.className !== "choose-currency" &&
-      e.target.className !== "arrow-choose" &&
-      e.target.className !== "currency-code" &&
-      e.target.className !== "currencies-container" &&
-      e.target.className !== "currency-search" &&
-      e.target.className !== "search" &&
-      e.target.className !== "currency"
+      !this.currency.current.contains(e.target) &&
+      !this.currencyTo.current.contains(e.target)
     ) {
       this.setState({
         activeSelectFrom: false,
@@ -321,13 +313,14 @@ class App extends Component {
         result = result.toFixed(2);
         this.setState({
           result: result,
-          resultText: this.state.numberValue +
+          resultText:
+            this.state.numberValue +
             " " +
             this.state.currentCurrencyFrom +
             " = " +
             result +
             " " +
-            this.state.currentCurrencyTo       
+            this.state.currentCurrencyTo
         });
       });
   };

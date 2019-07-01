@@ -38,8 +38,7 @@ class SelectCurrency extends Component {
               <p className="currency-desc" id={obj.id}>
                 {obj.currency}
               </p>
-              <div className="border-currency" id={obj.id}>
-              </div>
+              <div className="border-currency" id={obj.id}></div>
             </div>
           );
         })}
