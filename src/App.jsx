@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import SelectCurrency from "./components/SelectCurrency";
+import "babel-polyfill";
 import "./App.css";
+require("es6-promise").polyfill();
+require("isomorphic-fetch");
 
 class App extends Component {
   state = {
@@ -19,7 +22,17 @@ class App extends Component {
     this.currency = React.createRef();
     this.currencyTo = React.createRef();
 
-    let currencyContainer = [{ id: 0, code: "PLN", currency: "polski złoty" }];
+    this.checkNumber = this.checkNumber.bind(this);
+  }
+
+  componentDidMount() {
+    let currencyContainer = [
+      {
+        id: 0,
+        code: "PLN",
+        currency: "polski złoty"
+      }
+    ];
     fetch("http://api.nbp.pl/api/exchangerates/tables/a/?format=json", {
       method: "GET"
     })
@@ -44,8 +57,6 @@ class App extends Component {
           currencies: currencyContainer
         });
       });
-
-    this.checkNumber = this.checkNumber.bind(this);
   }
 
   render() {
