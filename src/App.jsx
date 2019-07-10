@@ -33,7 +33,7 @@ class App extends Component {
         currency: "polski złoty"
       }
     ];
-    fetch("http://api.nbp.pl/api/exchangerates/tables/a/?format=json", {
+    fetch("https://api.nbp.pl/api/exchangerates/tables/a/?format=json", {
       method: "GET"
     })
       .then(resp => resp.json())
@@ -297,7 +297,7 @@ class App extends Component {
           this.state.currentCurrencyTo
       });
     }
-    fetch("http://api.nbp.pl/api/exchangerates/tables/a/?format=json")
+    fetch("https://api.nbp.pl/api/exchangerates/tables/a/?format=json")
       .then(resp => resp.json())
       .then(resp => {
         let value = this.state.numberValue;
